@@ -109,11 +109,7 @@ function checkAnswer(index) {
   }
 }
 
-function showResult() {
-  document.querySelector(".quiz-box").innerHTML =
-    `<h2>結果：${score} / ${quiz.length} 問正解！🎉</h2>`;
-}
-
+function showResult() { let message = ""; if (score <= 2) { message = "しゃーない 😅"; } else if (score <= 4) { message = "おしいな！🔥"; } else { message = "神！！😆✨"; } document.querySelector(".quiz-box").innerHTML = `<h2>結果：${score} / ${quiz.length} 問正解！</h2> <h3>${message}</h3>`; }
 showQuiz();
 </script>
 
