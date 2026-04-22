@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>最強クイズ①</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background: #fff8dc;
+    text-align: center;
+  }
+  .quiz-box {
+    background: white;
+    padding: 20px;
+    margin: 40px auto;
+    width: 80%;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #ccc;
+  }
+  button {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: #87cefa;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #00bfff;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>🎉 クイズコース① 🎉</h1>
+
+<div class="quiz-box">
+  <h2 id="question"></h2>
+  <div id="choices"></div>
+  <p id="result"></p>
+</div>
+
+<script>
+const quiz = [
+  {
+    q: "靴下をなくす確率は右か左どっちが高い？",
+    c: ["右", "左", "変わんない"],
+    a: 0
+  },
+  {
+    q: "最強の給食は？",
+    c: ["あげぱん", "カレー", "パン"],
+    a: 0
+  },
+  {
+    q: "紐に結び目ができやすい理由は？",
+    c: ["長いから", "細いから", "両方"],
+    a: 2
+  },
+  {
+    q: "地球の形は？",
+    c: ["丸い", "平ら", "しかく"],
+    a: 0
+  },
+  {
+    q: "どうしてパスタは2つにきれいに折れないの？",
+    c: [
+      "折れた振動で他も折れる",
+      "才能がない",
+      "そう作られている"
+    ],
+    a: 0
+  }
+];
+
+let current = 0;
+let score = 0;
+
+function showQuiz() {
+  document.getElementById("result").textContent = "";
+  document.getElementById("question").textContent = quiz[current].q;
+
+  const choicesDiv = document.getElementById("choices");
+  choicesDiv.innerHTML = "";
+
+  quiz[current].c.forEach((choice, index) => {
+    const btn = document.createElement("button");
+    btn.textContent = choice;
+    btn.onclick = () => checkAnswer(index);
+    choicesDiv.appendChild(btn);
+  });
+}
+
+function checkAnswer(index) {
+  if (index === quiz[current].a) {
+    score++;
+    document.getElementById("result").textContent = "⭕ 正解！いいね！";
+  } else {
+    document.getElementById("result").textContent = "❌ ざんねん！";
+  }
+
+  current++;
+
+  if (current < quiz.length) {
+    setTimeout(showQuiz, 1000);
+  } else {
+    setTimeout(showResult, 1000);
+  }
+}
+
+function showResult() {
+  document.querySelector(".quiz-box").innerHTML =
+    `<h2>結果：${score} / ${quiz.length} 問正解！🎉</h2>`;
+}
+
+showQuiz();
+</script>
+
+</body>
+</html>
